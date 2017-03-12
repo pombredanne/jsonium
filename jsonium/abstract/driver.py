@@ -20,3 +20,6 @@ class Driver:
         if not isinstance(storage, Storage):
             raise TypeError('storage must be an instance of jsonium.abstract.Storage')
         self._storage = storage
+
+    def create_database(self, db_object):
+        raise NotImplementedError

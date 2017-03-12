@@ -6,3 +6,6 @@ class Storage:
 
     def __init__(self, *args, **kwargs):
         pass
+
+    def mkdir(self, dir_fd, **kwargs):
+        raise NotImplementedError

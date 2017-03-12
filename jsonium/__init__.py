@@ -13,6 +13,7 @@ class Jsonium:
     def __init__(self, name, driver):
         self.name = name
         self.driver = driver
+        self.driver.create_database(self)
 
     @property
     def name(self):
