@@ -20,6 +20,4 @@ class FileStorage(Storage):
             current_segment += segment + sep
             if not (os.path.exists(current_segment) and os.path.isdir(current_segment)):
                 os.mkdir(current_segment, mode)
-            else:
-                continue
         return True
