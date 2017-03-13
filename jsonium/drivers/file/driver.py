@@ -15,3 +15,11 @@ class FileDriver(Driver):
 
     def create_database(self, db_object):
         return self.storage.mkdir(os.path.join('databases', db_object.name))
+
+    def create_table(self, db_object, tb_object):
+        return self.storage.mkdir(os.path.join(
+            'databases',
+            db_object.name,
+            'tables',
+            tb_object.name,
+        ))
