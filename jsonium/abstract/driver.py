@@ -23,3 +23,6 @@ class Driver:
 
     def create_database(self, db_object):
         raise NotImplementedError
+
+    def create_table(self, db_object, tb_object):
+        raise NotImplementedError
