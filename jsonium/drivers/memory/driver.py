@@ -17,9 +17,25 @@ class MemoryDriver(Driver):
         return self.storage.mkdir(os.path.join('databases', db_object.name))
 
     def create_table(self, db_object, tb_object):
-        return self.storage.mkdir(os.path.join(
+        table_is_created = self.storage.mkdir(os.path.join(
             'databases',
             db_object.name,
             'tables',
             tb_object.name,
+            'documents',
         ))
+        meta_is_created = self.storage.mkdir(os.path.join(
+            'databases',
+            db_object.name,
+            'tables',
+            tb_object.name,
+            'meta',
+        ))
+        index_folder_is_created = self.storage.mkdir(os.path.join(
+            'databases',
+            db_object.name,
+            'tables',
+            tb_object.name,
+            'indexes',
+        ))
+        return table_is_created & meta_is_created & index_folder_is_created
