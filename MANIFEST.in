@@ -1,0 +1,5 @@
+include MANIFEST.in
+include LICENSE.txt
+graft jsonium
+global-exclude *.py[co]
+global-exclude __pycache__
