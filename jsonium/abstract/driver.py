@@ -4,7 +4,7 @@
 from jsonium.abstract.storage import Storage
 
 
-class Driver:
+class Driver(object):
 
     _storage = None
 
@@ -25,4 +25,10 @@ class Driver:
         raise NotImplementedError
 
     def create_table(self, db_object, tb_object):
+        raise NotImplementedError
+
+    def get_table_last_id(self, db_object, tb_object):
+        raise NotImplementedError
+
+    def set_table_last_id(self, db_object, tb_object, last_id):
         raise NotImplementedError
