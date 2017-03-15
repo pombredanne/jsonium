@@ -78,7 +78,9 @@ class FileDriver(Driver):
                 'tables',
                 tb_object.name,
                 'documents',
-                '%s.json'.format(doc_object.id)
+                '{f_name}.json'.format(
+                    f_name=doc_object.id,
+                ),
             ),
-            doc_object
+            doc_object.to_dict(),
         )
