@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 import threading
-
+from jsonium.core.document import Document
 
 class Table:
 
@@ -60,3 +60,17 @@ class Table:
         return '<jsonium.core.Table name="{name}">'.format(
             name=self.name,
         )
+
+    def insert(self, attributes):
+
+        document = Document(attributes)
+
+        self.database.driver.create_document(
+            self.database,
+            self,
+            document
+        )
+
+        self.last_id = document.id
+
+        return document
