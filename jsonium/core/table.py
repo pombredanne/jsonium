@@ -1,15 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
+import threading
+
 
 class Table:
 
+    _name = None
     _database = None
 
+    __mutex = None
+
     def __init__(self, name, db_object):
+        self.__mutex = threading.Lock()
         self.name = name
         self.database = db_object
         self.database.driver.create_table(self.database, self)
+        self.last_id = 0
 
     @property
     def name(self):
@@ -28,6 +35,26 @@ class Table:
     @database.setter
     def database(self, database):
         self._database = database
+
+    @property
+    def last_id(self):
+        return self.database.driver.get_table_last_id(
+            self.database,
+            self,
+        )
+
+    @last_id.setter
+    def last_id(self, last_id):
+        if not isinstance(last_id, int):
+            raise TypeError('last_id must be an instance of int')
+        self.__mutex.acquire()
+        self.database.driver.set_table_last_id(
+            self.database,
+            self,
+            last_id,
+        )
+        self.__mutex.release()
+
 
     def __repr__(self):
         return '<jsonium.core.Table name="{name}">'.format(

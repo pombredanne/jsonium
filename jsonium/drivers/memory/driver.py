@@ -17,25 +17,54 @@ class MemoryDriver(Driver):
         return self.storage.mkdir(os.path.join('databases', db_object.name))
 
     def create_table(self, db_object, tb_object):
-        table_is_created = self.storage.mkdir(os.path.join(
+        ok = True
+        ok &= self.storage.mkdir(os.path.join(
             'databases',
             db_object.name,
             'tables',
             tb_object.name,
             'documents',
         ))
-        meta_is_created = self.storage.mkdir(os.path.join(
+        ok &= self.storage.mkdir(os.path.join(
             'databases',
             db_object.name,
             'tables',
             tb_object.name,
             'meta',
         ))
-        index_folder_is_created = self.storage.mkdir(os.path.join(
+        ok &= self.storage.mkdir(os.path.join(
             'databases',
             db_object.name,
             'tables',
             tb_object.name,
             'indexes',
         ))
-        return table_is_created & meta_is_created & index_folder_is_created
+        return ok
+
+    def get_table_last_id(self, db_object, tb_object):
+        dict_obj = self.storage.read_json(
+            os.path.join(
+                'databases',
+                db_object.name,
+                'tables',
+                tb_object.name,
+                'meta',
+                'last_id.json',
+            )
+        )
+        return dict_obj.get('last_id', None)
+
+    def set_table_last_id(self, db_object, tb_object, last_id):
+        return self.storage.write_json(
+            os.path.join(
+                'databases',
+                db_object.name,
+                'tables',
+                tb_object.name,
+                'meta',
+                'last_id.json',
+            ),
+            {
+                'last_id': last_id,
+            },
+        )
