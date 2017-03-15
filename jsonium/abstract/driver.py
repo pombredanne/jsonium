@@ -33,5 +33,5 @@ class Driver(object):
     def set_table_last_id(self, db_object, tb_object, last_id):
         raise NotImplementedError
 
-    def create_document(self, db_object, tb_object, doc_object):
+    def insert_document(self, db_object, tb_object, doc_object):
         raise NotImplementedError

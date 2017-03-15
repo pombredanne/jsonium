@@ -69,7 +69,7 @@ class MemoryDriver(Driver):
             },
         )
 
-    def create_document(self, db_object, tb_object, doc_object):
+    def insert_document(self, db_object, tb_object, doc_object):
         return self.storage.write_json(
             os.path.join(
                 'databases',

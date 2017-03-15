@@ -61,7 +61,7 @@ class Table:
             'id': self.last_id,
         })
         document = Document(**attributes)
-        self.database.driver.create_document(
+        self.database.driver.insert_document(
             self.database,
             self,
             document,
