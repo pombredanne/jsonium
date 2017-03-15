@@ -68,3 +68,18 @@ class MemoryDriver(Driver):
                 'last_id': last_id,
             },
         )
+
+    def insert_document(self, db_object, tb_object, doc_object):
+        return self.storage.write_json(
+            os.path.join(
+                'databases',
+                db_object.name,
+                'tables',
+                tb_object.name,
+                'documents',
+                '{f_name}.json'.format(
+                    f_name=doc_object.id,
+                ),
+            ),
+            doc_object.to_dict(),
+        )

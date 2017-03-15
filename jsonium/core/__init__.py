@@ -2,4 +2,5 @@
 # -*- coding: UTF-8 -*-
 
 from jsonium.core.database import Database
-from jsonium.core.database import Table
+from jsonium.core.table import Table
+from jsonium.core.document import Document

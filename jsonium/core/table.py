@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 import threading
-
+from jsonium.core.document import Document
 
 class Table:
 
@@ -55,6 +55,18 @@ class Table:
         )
         self.__mutex.release()
 
+    def insert(self, **attributes):
+        self.last_id += 1
+        attributes.update({
+            'id': self.last_id,
+        })
+        document = Document(**attributes)
+        self.database.driver.insert_document(
+            self.database,
+            self,
+            document,
+        )
+        return document
 
     def __repr__(self):
         return '<jsonium.core.Table name="{name}">'.format(
